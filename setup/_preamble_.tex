@@ -1,0 +1,155 @@
+%%%%% font and language
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{enumitem, kantlipsum}
+\usepackage{secdot}
+\renewcommand*\rmdefault{ptm} %Font change
+%\usepackage{xcolor}
+\renewcommand{\thesection}{Section \arabic{section}}
+\sectiondot{subsection}
+\renewcommand\thesubsection{\alph{subsection}}
+
+\usepackage{titlesec}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{hhline}
+
+%%%%% page setup
+\usepackage[a4paper, left=1in, right=1in, top=1in, bottom=1in]{geometry}
+
+
+\usepackage{soul}
+
+%%%%% page numbers
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+% \pagestyle{fancy}
+\lhead{}
+\rhead{}
+\cfoot{Page \thepage\ of \pageref{LastPage}}
+
+\usepackage{mdframed}
+\newmdenv[
+  topline=false,
+  bottomline=false,
+  linewidth=1pt,
+  linecolor=blue!40
+]{siderules-blue}
+
+\newmdenv[
+  topline=false,
+  bottomline=false,
+  linewidth=1pt,
+  linecolor=red!40
+]{siderules-red}
+
+\definecolor{darkgreen}{RGB}{0, 117, 0}
+\newmdenv[
+  topline=false,
+  bottomline=false,
+  linewidth=1pt,
+  linecolor=darkgreen!40
+]{siderules-green}
+
+
+%%%%% figures and tables
+\usepackage{float}
+\usepackage[FIGTOPCAP]{subfigure}
+\usepackage[dvipsnames, table]{xcolor}
+
+\definecolor{darkerblue}{HTML}{21798E}
+\definecolor{lighterblue}{HTML}{2DA2BF}
+\definecolor{lightestblue}{HTML}{D2EAF1}
+\definecolor{lighterred}{HTML}{FF726F}
+\def\SWcomment[#1]{\textcolor{Green}{#1}}
+
+%%%%% maths
+\usepackage{gensymb}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+
+
+
+
+%%%%%% table of contents
+\addto\captionsenglish{\renewcommand{\contentsname}{Table of Contents}}
+
+
+
+
+%%%%% bibliography
+% \usepackage[maxbibnames=99, sorting=none]{biblatex}
+% \RequireBibliographyStyle{IEEEbib.bst}
+\usepackage{cite}
+
+
+
+
+%%%%% hyperlinks, references, and footnotes
+\usepackage[hidelinks]{hyperref}
+\usepackage{cleveref}
+\crefname{subsection}{subsection}{subsections}
+\crefname{subfigure}{subfigure}{subfigures}
+\crefname{lstlisting}{listing}{listings}
+\newcommand{\fullref}[1]{\Cref{#1} on page \pageref{#1}}
+\usepackage[bottom]{footmisc}
+
+
+
+
+%%%%% dummy text
+\usepackage{lipsum}
+
+
+
+
+%%%%% todo notes and highlight text
+\reversemarginpar
+\usepackage[textsize=tiny, linecolor=red, backgroundcolor=red!70, bordercolor=red]{todonotes}
+\usepackage{soul}
+
+
+
+
+%%%%% source code
+\usepackage[framed, numbered, autolinebreaks, useliterate]{setup/mcode}
+\lstset{
+	backgroundcolor=\color[rgb]{0.95, 0.95, 0.95},
+	captionpos=b,
+	frame=bottomline,
+	literate={-}{-}1,
+	numberstyle=\tiny\color{gray}
+}
+
+
+
+
+%%%%% invert background and text colors
+\def\true{true}
+\ifx \invertcolors\true
+	\pagecolor[rgb]{0.25, 0.25, 0.25}
+	\color[rgb]{0.95, 0.95, 0.95}
+\fi
+
+
+
+%%%%% count words
+\newcounter{counter}
+\begingroup
+	\lccode`\~=`\ % do not remove this comment
+	\lowercase{
+		\gdef\countwords{
+			\setcounter{counter}{0}
+			\catcode`~=\active
+			\def~{\space\stepcounter{counter}}
+			\todo{counting words...}
+		}
+	}
+\endgroup
+\def\endcountwords{
+	\stepcounter{counter}
+	\todo{total: \arabic{counter}}
+}
